@@ -1,3 +1,8 @@
+import * as Three from 'three'
+import oc from 'three-orbit-controls'
+
+const OrbitControls = oc(Three)
+
 //Create a scene
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0xbfe3dd);
@@ -5,6 +10,13 @@ const camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHei
 camera.position.z = 10; //important
 
 let mixer
+
+//ground
+const mesh = new THREE.Mesh(new THREE.PlaneGeometry(100,100), new THREE.MeshPhongMaterial({ color: 0x99999, depthWrite: false }));
+mesh.rotation.x = - Math.PI / 2;
+mesh.receiveShadow = true;
+scene.add(mesh)
+
 
 const loader = new THREE.GLTFLoader()
 
@@ -19,7 +31,10 @@ loader.load('/asset/RoughCharacter.gltf', function (gltf){
     model.scale.set(0.01, 0.01, 0.01);
     scene.add(model);
 
-    console.log(gltf.animations)
+    //something for the ground but has not worked yet
+    model.traverse( function (object){
+        if (object.isMesh) object.castShadow = true;
+    })
 
     mixer = new THREE.AnimationMixer(model);
     mixer.clipAction(gltf.animations[0]).play();
@@ -30,12 +45,18 @@ loader.load('/asset/RoughCharacter.gltf', function (gltf){
     console.error(error);
 })
 
-
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.render( scene, camera );
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enablePan = false;
+controls.enableZoom = false;
+controls.target.set(0, 1, 0);
+controls.update()
 
 function animate(){
     requestAnimationFrame(animate);
