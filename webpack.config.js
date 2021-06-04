@@ -1,5 +1,6 @@
 //Webpack uses this to work with directories
 const path = require('path');
+const webpack = require('webpack');
 
 //This is the main configuration object.
 //Here, you write different options and tell Webpack what to do
@@ -29,6 +30,12 @@ module.exports = {
             }
         ]
     },
+
+    plugins: [
+        new webpack.ProvidePlugin({
+               process: 'process/browser',
+        }),
+    ],
 
     //Default mode for Webpack is production.
     //Depending on mode Webpack will apply different things
