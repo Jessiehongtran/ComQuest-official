@@ -8,7 +8,8 @@ const OrbitControls = oc(Three)
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0xbfe3dd);
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 2000);
-camera.position.z = 5; //important
+camera.position.set(0,10,-10); //important
+
 
 let mixer
 let model
@@ -29,10 +30,10 @@ scene.add(light);
 
 const clock = new THREE.Clock();
 
-loader.load('/asset/RoughCharacter.gltf', function (gltf){
+loader.load('/asset/TestEnvironment.gltf', function (gltf){
     model = gltf.scene
-    model.position.set(0,2,-15);
-    model.scale.set(0.01, 0.01, 0.01);
+    model.position.set(0,0,0); //position of character
+    model.scale.set(0.005, 0.005, 0.005);
     scene.add(model);
 
     //rotate the character
@@ -51,8 +52,8 @@ loader.load('/asset/RoughCharacter.gltf', function (gltf){
           }
     })
 
-    mixer = new THREE.AnimationMixer(model);
-    mixer.clipAction(gltf.animations[0]).play();
+    // mixer = new THREE.AnimationMixer(model);
+    // mixer.clipAction(gltf.animations[0]).play();
 
     animate() //important
 
@@ -74,9 +75,9 @@ controls.target.set(0, 1, 0);
 controls.update()
 
 function animate(){
-    requestAnimationFrame(animate);
+    // requestAnimationFrame(animate);
     const delta = clock.getDelta();
-    mixer.update(delta);
+    // mixer.update(delta);
     renderer.render(scene, camera); //important
     controls.update()
 }
