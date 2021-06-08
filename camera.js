@@ -72,10 +72,17 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enablePan = false;
 controls.enableZoom = false;
 controls.target.set(0, 1, 0);
+controls.keys = {
+    LEFT: 'ArrowLeft',
+    UP: 'ArrowUp',
+    RIGHT: 'ArrowRight',
+    BOTTOM: 'ArrowDown'
+}
 controls.update()
 
+
 function animate(){
-    // requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
     const delta = clock.getDelta();
     // mixer.update(delta);
     renderer.render(scene, camera); //important
@@ -104,4 +111,4 @@ window.addEventListener('resize', function(){
     camera.updateProjectionMatrix;
 })
 
-document.addEventListener('keydown', e => handleKeyDown(e))
+//document.addEventListener('keydown', e => handleKeyDown(e))
