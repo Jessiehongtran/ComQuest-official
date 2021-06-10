@@ -4,12 +4,23 @@ import { mode } from './webpack.config';
 
 const OrbitControls = oc(Three)
 
+const alert = document.getElementById("alert")
+alert.style.position = 'absolute'
+alert.style.top = '5%'
+alert.style.left = '5%'
+
 //Create a scene
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0xbfe3dd);
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 2000);
 camera.position.set(0,10,-10); //important
 
+//Create a cube
+const geometry = new THREE.BoxGeometry();
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const cube = new THREE.Mesh(geometry, material);
+console.log(cube)
+scene.add(cube);
 
 let mixer
 let model
@@ -25,14 +36,13 @@ scene.add(mesh)
 
 const loader = new THREE.GLTFLoader()
 
-var light = new THREE.AmbientLight(0xffffff);
-scene.add(light);
-
+// var light = new THREE.AmbientLight(0xffffff);
+// scene.add(light);
 const clock = new THREE.Clock();
 
 loader.load('/asset/TestEnvironment.gltf', function (gltf){
     model = gltf.scene
-    model.position.set(0,0,0); //position of character
+    model.position.set(0,-6,0); //position of character
     model.scale.set(0.005, 0.005, 0.005);
     scene.add(model);
 
@@ -76,13 +86,12 @@ controls.keys = {
     LEFT: 'ArrowLeft',
     UP: 'ArrowUp',
     RIGHT: 'ArrowRight',
-    BOTTOM: 'ArrowDown'
+    DOWN: 'ArrowDown'
 }
-controls.update()
 
 
 function animate(){
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animate); //to get camera control work
     const delta = clock.getDelta();
     // mixer.update(delta);
     renderer.render(scene, camera); //important
@@ -92,14 +101,21 @@ function animate(){
 
 //move the 3d model with key control
 function handleKeyDown(e){
-    if (e.key === "ArrowLeft"){
-        model.position.x -= xSpeed
-    } else if (e.key === "ArrowRight"){
+    if (e.key === controls.keys.LEFT){
         model.position.x += xSpeed
-    } else if (e.key === "ArrowUp"){
+    } else if (e.key === controls.keys.RIGHT){
+        model.position.x -= xSpeed
+    } else if (e.key === controls.keys.UP){
         model.position.y += ySpeed
-    } else if (e.key === "ArrowDown"){
+    } else if (e.key === controls.keys.DOWN){
         model.position.y -= ySpeed
+    }
+    if (model.position.x - 1< cube.position.x &&  cube.position.x < model.position.x + 1
+        && model.position.y - 1 < cube.position.y && cube.position.y < model.position.y + 1 ){
+            console.log("hit")
+            alert.innerHTML = "HITTT.."
+    } else {
+        alert.innerHTML = ""
     }
 }
 
@@ -111,4 +127,4 @@ window.addEventListener('resize', function(){
     camera.updateProjectionMatrix;
 })
 
-//document.addEventListener('keydown', e => handleKeyDown(e))
+document.addEventListener('keydown', e => handleKeyDown(e))
