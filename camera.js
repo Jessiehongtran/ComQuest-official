@@ -40,7 +40,7 @@ const loader = new THREE.GLTFLoader()
 // scene.add(light);
 const clock = new THREE.Clock();
 
-loader.load('/asset/TestEnvironment.gltf', function (gltf){
+loader.load('/asset/RoughCharacter.gltf', function (gltf){
     model = gltf.scene
     model.position.set(0,-6,0); //position of character
     model.scale.set(0.005, 0.005, 0.005);
