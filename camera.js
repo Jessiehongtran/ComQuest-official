@@ -9,11 +9,15 @@ alert.style.position = 'absolute'
 alert.style.top = '5%'
 alert.style.left = '5%'
 
+const radius = 600;
+let theta = 0;
+let prevTime = Date.now();
+
 //Create a scene
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0xbfe3dd);
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 2000);
-camera.position.set(0,10,-10); //important
+camera.position.set(10,10,-10); //important
 
 //Create a cube
 const geometry = new THREE.BoxGeometry();
@@ -41,10 +45,11 @@ var light = new THREE.AmbientLight(0xffffff);
 scene.add(light);
 const clock = new THREE.Clock();
 
-loader.load('/asset/RoughCharacter.gltf', function (gltf){
+
+loader.load('/asset/Squirrel_walk2.gltf', function (gltf){
     model = gltf.scene
-    model.position.set(0,0,0); //position of character
-    model.scale.set(0.005, 0.005, 0.005);
+    model.position.set(0.7,-0.6,1); //position of character
+    model.scale.set(5, 5, 5);
     console.log(model)
     scene.add(model);
 
@@ -67,7 +72,7 @@ loader.load('/asset/RoughCharacter.gltf', function (gltf){
     model.traverse( function (object){
         if (object.isMesh) {
             object.castShadow = true;
-            object.material = stacy_mtl;
+            // object.material = stacy_mtl;
         }
         //checking to turn direction of object based on cursor
         if (object.isBone) {
@@ -136,6 +141,7 @@ function handleKeyDown(e){
         alert.innerHTML = ""
     }
 }
+
 
 window.addEventListener('resize', function(){
     let width = window.innerWidth;
