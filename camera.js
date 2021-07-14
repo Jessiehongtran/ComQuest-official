@@ -20,31 +20,43 @@ const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 const cube = new THREE.Mesh(geometry, material);
 console.log(cube)
-scene.add(cube);
+// scene.add(cube);
 
 let mixer
 let model
+let skeleton
 let xSpeed = 0.5
 let ySpeed = 0.5
 
 //ground
-const mesh = new THREE.Mesh(new THREE.PlaneGeometry(100,100), new THREE.MeshPhongMaterial({ color: 0x99999, depthWrite: false }));
-mesh.rotation.x = - Math.PI / 2;
-mesh.receiveShadow = true;
-scene.add(mesh)
+// const mesh = new THREE.Mesh(new THREE.PlaneGeometry(100,100), new THREE.MeshPhongMaterial({ color: 0x99999, depthWrite: false }));
+// mesh.rotation.x = - Math.PI / 2;
+// mesh.receiveShadow = true;
+// scene.add(mesh)
 
 
 const loader = new THREE.GLTFLoader()
 
-// var light = new THREE.AmbientLight(0xffffff);
-// scene.add(light);
+var light = new THREE.AmbientLight(0xffffff);
+scene.add(light);
 const clock = new THREE.Clock();
 
 loader.load('/asset/RoughCharacter.gltf', function (gltf){
     model = gltf.scene
-    model.position.set(0,-6,0); //position of character
+    model.position.set(0,0,0); //position of character
     model.scale.set(0.005, 0.005, 0.005);
+    console.log(model)
     scene.add(model);
+
+    let stacy_txt = new THREE.TextureLoader().load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/stacy.jpg');
+
+    stacy_txt.flipY = false; 
+
+    const stacy_mtl = new THREE.MeshPhongMaterial({
+        map: stacy_txt,
+        color: 0xffffff,
+        skinning: true
+      });
 
     //rotate the character
     // model.rotation.x = THREE.MathUtils.degToRad(-60);
@@ -55,6 +67,7 @@ loader.load('/asset/RoughCharacter.gltf', function (gltf){
     model.traverse( function (object){
         if (object.isMesh) {
             object.castShadow = true;
+            object.material = stacy_mtl;
         }
         //checking to turn direction of object based on cursor
         if (object.isBone) {
@@ -62,8 +75,13 @@ loader.load('/asset/RoughCharacter.gltf', function (gltf){
           }
     })
 
-    // mixer = new THREE.AnimationMixer(model);
-    // mixer.clipAction(gltf.animations[0]).play();
+    skeleton = new THREE.SkeletonHelper( model );
+    console.log('skeleton', skeleton)
+    skeleton.visible = true;
+    scene.add( skeleton );
+
+    mixer = new THREE.AnimationMixer(model);
+    mixer.clipAction(gltf.animations[0]).play();
 
     animate() //important
 
@@ -93,7 +111,7 @@ controls.keys = {
 function animate(){
     requestAnimationFrame(animate); //to get camera control work
     const delta = clock.getDelta();
-    // mixer.update(delta);
+    mixer.update(delta);
     renderer.render(scene, camera); //important
     controls.update()
 }
