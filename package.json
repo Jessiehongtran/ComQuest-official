@@ -27,5 +27,8 @@
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "three-fbx-loader": "^1.0.3",
+    "threex": "^1.0.0"
+  }
 }
