@@ -1,6 +1,6 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118.1/build/three.module.js';
 import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
-
+import {GLTFLoader} from 'https://cdn.rawgit.com/mrdoob/three.js/master/examples/jsm/loaders/GLTFLoader.js'
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0xbfe3dd);
@@ -18,30 +18,16 @@ scene.add(light);
 
 const loader = new FBXLoader()
 
-// loader.load( '/asset/BirchTree_1.fbx', function ( object ) {
-//     tree = object
-//     scene.add( tree );
 
-// }, undefined, function ( e ) {
+loader.load( '/asset/Alien_Tall.fbx', function ( obj ) {
+    mixer = new THREE.AnimationMixer(obj)
+    let action = mixer.clipAction(obj.animations[1])
+    action.play()
 
-//   console.error( e );
+    scene.add( obj );
 
-// } );
-
-loader.load( '/asset/peasant_girl.fbx', function ( object ) {
-    girl = object
-    console.log('girl', girl)
-    girl.position.set(10,10,10)
-    scene.add( girl );
-
-    mixer = new THREE.AnimationMixer(girl)
-    const clips = girl.animations
-    console.log('clips', clips)
-    clips.forEach(function(clip){
-      mixer.clipAction(clip).play()
-    })
-
-    console.log('mixer', mixer)
+    animate()
+    
 
 }, undefined, function ( e ) {
 
@@ -61,8 +47,10 @@ function animate(){
     requestAnimationFrame(animate); 
     renderer.render(scene, camera)
     const delta = clock.getDelta();
-    mixer.update(delta);
+    if (mixer){
+      mixer.update(delta);
+    }
 }
 
-animate()
+
 
