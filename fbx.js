@@ -11,6 +11,14 @@ const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHei
 camera.position.set(100,200,300); //important
 camera.lookAt(scene.position)
 
+const axes = new THREE.AxesHelper(500);
+axes.position.set(200,-500,-1800);
+var colors = axes.geometry.attributes.color;
+colors.setXYZ( 1, 1, 0, 0 ); // red
+colors.setXYZ( 3, 0, 1, 0 ); // green
+colors.setXYZ( 5, 0, 0, 1 ); // blue
+scene.add(axes)
+
 let clock = new THREE.Clock();
 
 let mixer
