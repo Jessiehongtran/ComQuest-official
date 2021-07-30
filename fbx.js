@@ -1,8 +1,9 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118.1/build/three.module.js';
 import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
-// import { GLTFLoader } from 'https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js'
+import { assets } from './asset/assets.js'
 
-let bee
+
+let bee, squirrel
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0xC8F0FA);
@@ -18,78 +19,38 @@ var light = new THREE.AmbientLight(0xF38902  );
 scene.add(light);
 
 const FBXloader = new FBXLoader()
-// const GLTFloader = new THREE.GLTFLoader()
 
-// GLTFloader.load( '/asset/Cloud1.glb', function ( obj ) {
-//   // obj.position.set(1400,0,-1600)
-//   // obj.scale.set(1.2,1.2,1.2)
-//   scene.add( obj.scene );
-// }, undefined, function ( e ) {
-//   console.error( e );
-// } );
+for (let i = 0; i < assets.length; i++){
+  FBXloader.load( assets[i].path, function ( obj ) {
+    obj.position.set( assets[i].x, assets[i].y, assets[i].z)
+    obj.scale.set( assets[i].xscale, assets[i].yscale, assets[i].zscale)
+    scene.add( obj );
+  }, undefined, function ( e ) {
+    console.error( e );
+  } );
+}
 
-// FBXloader.load( '/asset/Squirrel_walk.fbx', function ( obj ) {
-//   obj.position.set(700,0,-1600)
-//   obj.scale.set(1,1,1)
-//   scene.add( obj );
-// }, undefined, function ( e ) {
-//   console.error( e );
-// } );
-
-FBXloader.load( '/asset/Level_3_Cubicle.fbx', function ( obj ) {
-  obj.position.set(600,400,-1800)
-  obj.scale.set(1.5,1.5,1.5)
-  scene.add( obj );
-}, undefined, function ( e ) {
-  console.error( e );
-} );
-
-FBXloader.load( '/asset/Level_3_Door.fbx', function ( obj ) {
-  obj.position.set(-600,400,-1800)
-  obj.scale.set(0.7,0.7,0.7)
-  scene.add( obj );
-}, undefined, function ( e ) {
-  console.error( e );
-} );
-
-FBXloader.load( '/asset/Level_3_ElevatorDoor.fbx', function ( obj ) {
-  obj.position.set(0,-400,-1800)
-  obj.scale.set(1,1,1)
-  scene.add( obj );
-}, undefined, function ( e ) {
-  console.error( e );
-} );
-
-
-FBXloader.load( '/asset/PineTree_Autumn_1.fbx', function ( obj ) {
-  obj.position.set(1400,0,-1600)
-  obj.scale.set(1.2,1.2,1.2)
-  scene.add( obj );
-}, undefined, function ( e ) {
-  console.error( e );
-} );
-
-FBXloader.load( '/asset/Rock_1.fbx', function ( obj ) {
-  obj.position.set(-1200,0,-1600)
-  obj.scale.set(2,2,2)
-  scene.add( obj );
-}, undefined, function ( e ) {
-  console.error( e );
-} );
-
-FBXloader.load( '/asset/CactusFlower_1.fbx', function ( obj ) {
-  obj.position.set(600,-200,-1000)
-  obj.scale.set(2,2,1.2)
-  scene.add( obj );
-}, undefined, function ( e ) {
-  console.error( e );
-} );
 
 FBXloader.load( '/asset/Flowers.fbx', function ( obj ) {
   obj.position.set(10,10,-30)
   scene.add( obj );
 }, undefined, function ( e ) {
   console.error( e );
+} );
+
+FBXloader.load( '/asset/Squirrel_Fillet_Walk.fbx', function ( obj ) {
+  mixer = new THREE.AnimationMixer(obj)
+  let action = mixer.clipAction(obj.animations[0])
+  action.play()
+  squirrel = obj
+  obj.scale.set(1,1,1)
+  obj.position.set(200,-500,-1800)
+  scene.add( obj );    
+
+}, undefined, function ( e ) {
+
+console.error( e );
+
 } );
 
 
@@ -119,8 +80,8 @@ document.body.appendChild(renderer.domElement);
 
 function animate(){
     requestAnimationFrame(animate);
-    if (bee){ 
-      camera.lookAt(bee.position)
+    if (squirrel){ 
+      camera.lookAt(squirrel.position)
     }
     renderer.render(scene, camera)
     const delta = clock.getDelta();
@@ -132,13 +93,17 @@ function animate(){
 
 function handleKeyDown(e){
   if (e.key === 'ArrowLeft'){
-    bee.position.x -= 10
+    squirrel.position.x -= 10
   } else if (e.key === 'ArrowRight'){
-    bee.position.x += 10
+    squirrel.position.x += 10
   } else if (e.key === 'ArrowDown'){
-    bee.position.z += 30
+    squirrel.position.z += 30
   } else if (e.key === 'ArrowUp'){
-    bee.position.z -= 30
+    squirrel.position.z -= 30
+  }
+
+  if (e.key === "Enter"){
+    squirrel.rotateY(0.1)
   }
 }
 
