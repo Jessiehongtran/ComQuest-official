@@ -17,7 +17,7 @@ var colors = axes.geometry.attributes.color;
 colors.setXYZ( 1, 1, 0, 0 ); // red
 colors.setXYZ( 3, 0, 1, 0 ); // green
 colors.setXYZ( 5, 0, 0, 1 ); // blue
-scene.add(axes)
+// scene.add(axes)
 
 let clock = new THREE.Clock();
 
@@ -101,13 +101,13 @@ function animate(){
 
 function handleKeyDown(e){
   if (e.key === 'ArrowLeft'){
-    squirrel.position.x -= 10
+    squirrel.rotateY(-1.5)
   } else if (e.key === 'ArrowRight'){
-    squirrel.position.x += 10
+    squirrel.rotateY(3)
   } else if (e.key === 'ArrowDown'){
-    squirrel.position.z += 30
+    squirrel.translateZ(-30)
   } else if (e.key === 'ArrowUp'){
-    squirrel.position.z -= 30
+    squirrel.translateZ(30)
   }
 
   if (e.key === "Enter"){
