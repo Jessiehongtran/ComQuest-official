@@ -14,6 +14,9 @@ const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHei
 camera.position.set(100,200,300); //important
 camera.lookAt(scene.position)
 
+let cameraHelper = new THREE.CameraHelper(camera);
+scene.add(cameraHelper)
+
 const axes = new THREE.AxesHelper(500);
 axes.position.set(200,-500,-1800);
 var colors = axes.geometry.attributes.color;
@@ -25,9 +28,6 @@ colors.setXYZ( 5, 0, 0, 1 ); // blue
 let clock = new THREE.Clock();
 
 let mixer
-
-var light = new THREE.AmbientLight(0xF38902  );
-scene.add(light);
 
 const FBXloader = new FBXLoader()
 
@@ -54,7 +54,7 @@ FBXloader.load( '/asset/Squirrel_Fillet_Walk.fbx', function ( obj ) {
   let action = mixer.clipAction(obj.animations[0])
   action.play()
   squirrel = obj
-  obj.scale.set(1,1,1)
+  obj.scale.set(0.6,0.6,0.6)
   obj.position.set(200,-500,-1800)
   scene.add( obj );    
 
@@ -88,6 +88,44 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
+
+//LIGHTS
+// var light = new THREE.AmbientLight(0xF38902, 1.4 );
+// scene.add(light);
+
+// var light = new THREE.PointLight(0xF38902, 2.0, 5000);
+// scene.add(light)
+
+// var light = new THREE.DirectionalLight(0xF38902, 2.0, 1000);
+// if (squirrel){
+//   light.target = squirrel
+// }
+// scene.add(light)
+
+var light = new THREE.HemisphereLight(0xffffbb, 0x0808dd, 1);
+scene.add(light)
+
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFShadowMap;
+
+//SHADOW
+var light = new THREE.SpotLight(0xFFFFFF, 4.0, 3000);
+light.position.y = 100;
+if (squirrel){
+  light.target = squirrel;
+}
+
+light.cashShadow = true;
+light.shadow = new THREE.LightShadow(new THREE.PerspectiveCamera(100, 1, 500, 1000));
+light.shadow.bias = 0.0001;
+light.shadow.mapSize.width = 2048*2;
+light.shadow.mapSize.height = 2048*2;
+scene.add(light);
+
+if (squirrel){
+  squirrel.castShadow = true;
+  squirrel.receiveShadow = true;
+}
 
 function animate(){
     requestAnimationFrame(animate);

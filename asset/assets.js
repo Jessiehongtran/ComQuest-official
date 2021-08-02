@@ -8,15 +8,15 @@ export const assets = [
       yscale: 1.5,
       zscale: 1.5
     },
-    {
-      path: '/asset/Level_3_Door.fbx',
-      x: -600,
-      y: 400, 
-      z: -1800,
-      xscale: 0.7, 
-      yscale: 0.7,
-      zscale: 0.7
-    },
+    // {
+    //   path: '/asset/Level_3_Door.fbx',
+    //   x: -600,
+    //   y: 400, 
+    //   z: -1800,
+    //   xscale: 0.7, 
+    //   yscale: 0.7,
+    //   zscale: 0.7
+    // },
     {
       path: '/asset/Level_3_ElevatorDoor.fbx',
       x: 0,
