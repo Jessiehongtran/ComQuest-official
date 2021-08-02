@@ -1,5 +1,6 @@
 export const assets = [
     {
+      name: "Cubicle",
       path: '/asset/Level_3_Cubicle.fbx',
       x: 600,
       y: 400, 
@@ -9,6 +10,7 @@ export const assets = [
       zscale: 1.5
     },
     // {
+    //   name: "Floor",
     //   path: '/asset/Level_3_Door.fbx',
     //   x: -600,
     //   y: 400, 
@@ -18,6 +20,7 @@ export const assets = [
     //   zscale: 0.7
     // },
     {
+      name: "ElevatorDoor",
       path: '/asset/Level_3_ElevatorDoor.fbx',
       x: 0,
       y: -400, 
@@ -27,6 +30,7 @@ export const assets = [
       zscale: 1
     },
     {
+      name: "Pinetree",
       path: '/asset/PineTree_Autumn_1.fbx',
       x: 1400,
       y: 0, 
@@ -36,6 +40,7 @@ export const assets = [
       zscale: 2
     },
     {
+      name: "Rock",
       path: '/asset/Rock_1.fbx',
       x: -1200,
       y: 0, 
@@ -45,6 +50,7 @@ export const assets = [
       zscale: 2
     },
     {
+      name: "Cactus",
       path: '/asset/CactusFlower_1.fbx',
       x: 600,
       y: -200, 
@@ -54,6 +60,7 @@ export const assets = [
       zscale: 1.2
     },
     {
+      name: "Flowers",
       path: '/asset/Flowers.fbx',
       x: 10,
       y: 10, 

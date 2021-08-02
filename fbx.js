@@ -11,6 +11,8 @@ import { assets } from './asset/assets.js'
 
 let bee, squirrel
 
+const warning = document.getElementById('warning')
+
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0xC8F0FA);
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 20000);
@@ -76,13 +78,7 @@ for (let i = 0; i < assets.length; i++){
     console.error( e );
   } );
 
-  // if (squirrel && squirrel.position.x >= assets[i].x && squirrel.position.x <= assets[i].x + 200 && squirrel.position.z >= assets[i].z && squirrel.position.x <= assets[i].x + 200){
-  //   console.log('hit', assets[i])
-  // }
-
 }
-
-
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio( window.devicePixelRatio );
@@ -95,7 +91,7 @@ document.body.appendChild(renderer.domElement);
 // var light = new THREE.AmbientLight(0xF38902, 1.4 );
 // scene.add(light);
 
-// var light = new THREE.PointLight(0xF38902, 2.0, 5000);
+// var light = new THREE.PointLight(0xF38902, 1.0, 5000);
 // scene.add(light)
 
 // var light = new THREE.DirectionalLight(0xF38902, 2.0, 1000);
@@ -138,6 +134,13 @@ function animate(){
     const delta = clock.getDelta();
     if (mixer && mixer.length > 0){
       mixer.forEach(each => each.update(delta));
+    }
+
+    
+    for (let i = 0; i < assets.length; i++){
+      if (squirrel && squirrel.position.x >= assets[i].x - 100 && squirrel.position.x <= assets[i].x + 100 && squirrel.position.z >= assets[i].z - 100 && squirrel.position.z <= assets[i].z + 100){
+        warning.innerHTML = "Hit " + assets[i].name
+      } 
     }
 
 }
