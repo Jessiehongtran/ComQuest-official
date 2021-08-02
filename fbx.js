@@ -3,6 +3,9 @@ import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm
 import { assets } from './asset/assets.js'
 
 
+//Next steps:
+//Add collision
+
 let bee, squirrel
 
 const scene = new THREE.Scene()
@@ -118,4 +121,11 @@ function handleKeyDown(e){
 animate()
 document.addEventListener('keydown', e => handleKeyDown(e))
 
+window.addEventListener('resize', function(){
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  renderer.setSize(width, height);
+  camera.aspect = width/height;
+  camera.updateProjectionMatrix;
+})
 
