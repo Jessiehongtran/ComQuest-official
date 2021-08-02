@@ -6,6 +6,9 @@ import { assets } from './asset/assets.js'
 //Next steps:
 //Add collision
 
+//Questions/curiosity:
+
+
 let bee, squirrel
 
 const scene = new THREE.Scene()
@@ -27,33 +30,16 @@ colors.setXYZ( 5, 0, 0, 1 ); // blue
 
 let clock = new THREE.Clock();
 
-let mixer
+let mixer = []
 
 const FBXloader = new FBXLoader()
 
-for (let i = 0; i < assets.length; i++){
-  FBXloader.load( assets[i].path, function ( obj ) {
-    obj.position.set( assets[i].x, assets[i].y, assets[i].z)
-    obj.scale.set( assets[i].xscale, assets[i].yscale, assets[i].zscale)
-    scene.add( obj );
-  }, undefined, function ( e ) {
-    console.error( e );
-  } );
-}
-
-
-FBXloader.load( '/asset/Flowers.fbx', function ( obj ) {
-  obj.position.set(10,10,-30)
-  scene.add( obj );
-}, undefined, function ( e ) {
-  console.error( e );
-} );
-
 FBXloader.load( '/asset/Squirrel_Fillet_Walk.fbx', function ( obj ) {
-  mixer = new THREE.AnimationMixer(obj)
-  let action = mixer.clipAction(obj.animations[0])
-  action.play()
   squirrel = obj
+  let newMixer = new THREE.AnimationMixer(obj)
+  let action = newMixer.clipAction(obj.animations[0])
+  action.play()
+  mixer.push(newMixer)
   obj.scale.set(0.6,0.6,0.6)
   obj.position.set(200,-500,-1800)
   scene.add( obj );    
@@ -64,22 +50,38 @@ console.error( e );
 
 } );
 
-
 FBXloader.load( '/asset/Bee.fbx', function ( obj ) {
-    mixer = new THREE.AnimationMixer(obj)
-    let action = mixer.clipAction(obj.animations[1])
-    action.play()
-    bee = obj
-    console.log('bee', bee)
-    obj.scale.set(0.3,0.3,0.3)
-    obj.position.set(10,10,-1000)
-    scene.add( obj );    
+  let newMixer = new THREE.AnimationMixer(obj)
+  let action = newMixer.clipAction(obj.animations[1])
+  action.play()
+  mixer.push(newMixer)
+  bee = obj
+  console.log('bee', bee)
+  obj.scale.set(0.3,0.3,0.3)
+  obj.position.set(10,10,-1000)
+  scene.add( obj );    
 
 }, undefined, function ( e ) {
 
-  console.error( e );
+console.error( e );
 
 } );
+
+for (let i = 0; i < assets.length; i++){
+  FBXloader.load( assets[i].path, function ( obj ) {
+    obj.position.set( assets[i].x, assets[i].y, assets[i].z)
+    obj.scale.set( assets[i].xscale, assets[i].yscale, assets[i].zscale)
+    scene.add( obj );
+  }, undefined, function ( e ) {
+    console.error( e );
+  } );
+
+  // if (squirrel && squirrel.position.x >= assets[i].x && squirrel.position.x <= assets[i].x + 200 && squirrel.position.z >= assets[i].z && squirrel.position.x <= assets[i].x + 200){
+  //   console.log('hit', assets[i])
+  // }
+
+}
+
 
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -108,7 +110,7 @@ scene.add(light)
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
 
-//SHADOW
+//SHADOW -- but does not work yet
 var light = new THREE.SpotLight(0xFFFFFF, 4.0, 3000);
 light.position.y = 100;
 if (squirrel){
@@ -134,8 +136,8 @@ function animate(){
     }
     renderer.render(scene, camera)
     const delta = clock.getDelta();
-    if (mixer){
-      mixer.update(delta);
+    if (mixer && mixer.length > 0){
+      mixer.forEach(each => each.update(delta));
     }
 
 }
