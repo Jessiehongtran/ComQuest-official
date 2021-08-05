@@ -19,8 +19,8 @@ const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHei
 camera.position.set(100,200,300); //important
 camera.lookAt(scene.position)
 
-let cameraHelper = new THREE.CameraHelper(camera);
-scene.add(cameraHelper)
+// let cameraHelper = new THREE.CameraHelper(camera);
+// scene.add(cameraHelper)
 
 const axes = new THREE.AxesHelper(500);
 axes.position.set(200,-500,-1800);
