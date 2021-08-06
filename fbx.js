@@ -22,6 +22,7 @@ camera.lookAt(scene.position)
 // let cameraHelper = new THREE.CameraHelper(camera);
 // scene.add(cameraHelper)
 
+
 const axes = new THREE.AxesHelper(500);
 axes.position.set(200,-500,-1800);
 var colors = axes.geometry.attributes.color;
