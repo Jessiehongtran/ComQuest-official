@@ -39,9 +39,9 @@ function showText(){
         const btn = document.createElement('button')
         btn.innerHTML = 'Play'
         btn.addEventListener('click', () => {window.location.href="fbx.html"})
-        btn.style.padding = '10px 20px'
+        btn.style.padding = '10px 30px'
         btn.style.fontSize = '18px'
-        btn.style.borderRadius = '16px'
+        btn.style.borderRadius = '18px'
         container.appendChild(btn)
     }
 }
