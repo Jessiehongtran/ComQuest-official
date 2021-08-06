@@ -12,6 +12,8 @@ text.style.position = 'absolute'
 let introOrder = 0
 let x,y
 let next = false
+const container = document.getElementsByClassName('container')[0]
+
 
 function runFromLeftToCenter(){
     if (x > 25){
@@ -33,6 +35,11 @@ function showText(){
         text.style.top = `${y}%`
         runFromLeftToCenter()
         introOrder += 1
+    } else {
+        const btn = document.createElement('button')
+        btn.innerHTML = 'Play'
+        btn.addEventListener('click', () => {window.location.href="fbx.html"})
+        container.appendChild(btn)
     }
 }
 
