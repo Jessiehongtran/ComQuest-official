@@ -37,6 +37,34 @@ let mixer = []
 
 const FBXloader = new FBXLoader()
 
+// FBXloader.load( '/asset/Bee.fbx', function ( obj ) {
+//   let newMixer = new THREE.AnimationMixer(obj)
+//   let action = newMixer.clipAction(obj.animations[1])
+//   action.play()
+//   mixer.push(newMixer)
+//   bee = obj
+//   console.log('bee', bee)
+//   obj.scale.set(0.3,0.3,0.3)
+//   obj.position.set(10,10,-1000)
+//   scene.add( obj );    
+
+// }, undefined, function ( e ) {
+
+// console.error( e );
+
+// } );
+
+for (let i = 0; i < assets.length; i++){
+  FBXloader.load( assets[i].path, function ( obj ) {
+    obj.position.set( assets[i].x, assets[i].y, assets[i].z)
+    obj.scale.set( assets[i].xscale, assets[i].yscale, assets[i].zscale)
+    scene.add( obj );
+  }, undefined, function ( e ) {
+    console.error( e );
+  } );
+
+}
+
 FBXloader.load( '/asset/Squirrel_Fillet_Walk.fbx', function ( obj ) {
   squirrel = obj
   let newMixer = new THREE.AnimationMixer(obj)
@@ -52,34 +80,6 @@ FBXloader.load( '/asset/Squirrel_Fillet_Walk.fbx', function ( obj ) {
 console.error( e );
 
 } );
-
-FBXloader.load( '/asset/Bee.fbx', function ( obj ) {
-  let newMixer = new THREE.AnimationMixer(obj)
-  let action = newMixer.clipAction(obj.animations[1])
-  action.play()
-  mixer.push(newMixer)
-  bee = obj
-  console.log('bee', bee)
-  obj.scale.set(0.3,0.3,0.3)
-  obj.position.set(10,10,-1000)
-  scene.add( obj );    
-
-}, undefined, function ( e ) {
-
-console.error( e );
-
-} );
-
-for (let i = 0; i < assets.length; i++){
-  FBXloader.load( assets[i].path, function ( obj ) {
-    obj.position.set( assets[i].x, assets[i].y, assets[i].z)
-    obj.scale.set( assets[i].xscale, assets[i].yscale, assets[i].zscale)
-    scene.add( obj );
-  }, undefined, function ( e ) {
-    console.error( e );
-  } );
-
-}
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio( window.devicePixelRatio );
@@ -133,9 +133,9 @@ function animate(){
     }
     renderer.render(scene, camera)
     const delta = clock.getDelta();
-    if (mixer && mixer.length > 0){
-      mixer.forEach(each => each.update(delta));
-    }
+    // if (mixer && mixer.length > 0){
+    //   mixer.forEach(each => each.update(delta));
+    // }
 
     
     for (let i = 0; i < assets.length; i++){
