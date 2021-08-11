@@ -10,63 +10,53 @@ export const assets = [
       zscale: 1.5
     },
     {
-      name: "Floor",
-      path: '/asset/Level_3_Structure.fbx',
-      x: -400,
+      name: "Dividing Wall",
+      path: '/asset/Level_3_Components/Level_3_DividingWall_01.fbx',
+      x: -200,
       y: 0, 
       z: 0,
-      xscale: 0.5, 
-      yscale: 0.5,
-      zscale: 0.5
+      xscale: 1, 
+      yscale: 1,
+      zscale: 1
     },
-    // {
-    //   name: "ElevatorDoor",
-    //   path: '/asset/Level_3_ElevatorDoor.fbx',
-    //   x: 0,
-    //   y: -400, 
-    //   z: -1800,
-    //   xscale: 1, 
-    //   yscale: 1,
-    //   zscale: 1
-    // },
-    // {
-    //   name: "Pinetree",
-    //   path: '/asset/PineTree_Autumn_1.fbx',
-    //   x: 1400,
-    //   y: 0, 
-    //   z: -1600,
-    //   xscale: 2, 
-    //   yscale: 2,
-    //   zscale: 2
-    // },
-    // {
-    //   name: "Rock",
-    //   path: '/asset/Rock_1.fbx',
-    //   x: -1200,
-    //   y: 0, 
-    //   z: -1600,
-    //   xscale: 2, 
-    //   yscale: 2,
-    //   zscale: 2
-    // },
-    // {
-    //   name: "Cactus",
-    //   path: '/asset/CactusFlower_1.fbx',
-    //   x: 600,
-    //   y: -200, 
-    //   z: -1000,
-    //   xscale: 2, 
-    //   yscale: 2,
-    //   zscale: 1.2
-    // },
-    // {
-    //   name: "Flowers",
-    //   path: '/asset/Flowers.fbx',
-    //   x: 10,
-    //   y: 10, 
-    //   z: -30,
-    //   xscale: 1, 
-    //   yscale: 1,
-    //   zscale: 1
-    // }
+    {
+      name: "Floor",
+      path: '/asset/Level_3_Components/Level_3_Floor.fbx',
+      x: -200,
+      y: -200, 
+      z: 0,
+      xscale: 1, 
+      yscale: 1,
+      zscale: 1
+    },
+    {
+      name: "Inner Wall 1",
+      path: '/asset/Level_3_Components/Level_3_InnerWall_01.fbx',
+      x: 100,
+      y: 0, 
+      z: 0,
+      xscale: 1, 
+      yscale: 1,
+      zscale: 1
+    },
+    {
+      name: "Inner Wall 2",
+      path: '/asset/Level_3_Components/Level_3_InnerWall_02.fbx',
+      x: 500,
+      y: 0, 
+      z: 0,
+      xscale: 1, 
+      yscale: 1,
+      zscale: 1
+    },
+    {
+      name: "Outer Wall",
+      path: '/asset/Level_3_Components/Level_3_OuterWall.fbx',
+      x: 300,
+      y: 0, 
+      z: 0,
+      xscale: 1, 
+      yscale: 1,
+      zscale: 1
+    },
   ]
