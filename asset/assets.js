@@ -7,7 +7,8 @@ export const assets = [
       z: -1800,
       xscale: 1.5, 
       yscale: 1.5,
-      zscale: 1.5
+      zscale: 1.5,
+      bgColor: "000000"
     },
     {
       name: "Dividing Wall",
@@ -17,17 +18,19 @@ export const assets = [
       z: 0,
       xscale: 1, 
       yscale: 1,
-      zscale: 1
+      zscale: 1,
+      bgColor: "F38902"
     },
     {
       name: "Floor",
       path: '/asset/Level_3_Components/Level_3_Floor.fbx',
-      x: -200,
-      y: -200, 
+      x: 200,
+      y: 0, 
       z: 0,
       xscale: 1, 
       yscale: 1,
-      zscale: 1
+      zscale: 1,
+      bgColor: "503F3A"
     },
     {
       name: "Inner Wall 1",
@@ -37,7 +40,8 @@ export const assets = [
       z: 0,
       xscale: 1, 
       yscale: 1,
-      zscale: 1
+      zscale: 1,
+      bgColor: "F38902"
     },
     {
       name: "Inner Wall 2",
@@ -47,7 +51,8 @@ export const assets = [
       z: 0,
       xscale: 1, 
       yscale: 1,
-      zscale: 1
+      zscale: 1,
+      bgColor: "F38902"
     },
     {
       name: "Outer Wall",
@@ -57,6 +62,7 @@ export const assets = [
       z: 0,
       xscale: 1, 
       yscale: 1,
-      zscale: 1
+      zscale: 1,
+      bgColor: "1BD9FA"
     },
   ]

@@ -39,23 +39,6 @@ let mixer = []
 
 const FBXloader = new FBXLoader()
 
-// FBXloader.load( '/asset/Bee.fbx', function ( obj ) {
-//   let newMixer = new THREE.AnimationMixer(obj)
-//   let action = newMixer.clipAction(obj.animations[1])
-//   action.play()
-//   mixer.push(newMixer)
-//   bee = obj
-//   console.log('bee', bee)
-//   obj.scale.set(0.3,0.3,0.3)
-//   obj.position.set(10,10,-1000)
-//   scene.add( obj );    
-
-// }, undefined, function ( e ) {
-
-// console.error( e );
-
-// } );
-
 
 for (let i = 0; i < assets.length; i++){
   FBXloader.load( assets[i].path, function ( obj ) {
@@ -92,8 +75,8 @@ renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
 
 //LIGHTS
-// var light = new THREE.AmbientLight(0xF38902, 1.4 );
-// scene.add(light);
+var light = new THREE.AmbientLight(0xF38902, 1.4 );
+scene.add(light);
 
 // var light = new THREE.PointLight(0xF38902, 1.0, 5000);
 // scene.add(light)
