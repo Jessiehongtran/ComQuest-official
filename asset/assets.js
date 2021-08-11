@@ -15,9 +15,9 @@ export const assets = [
       x: -400,
       y: 0, 
       z: 0,
-      xscale: 0.7, 
-      yscale: 0.7,
-      zscale: 0.7
+      xscale: 0.5, 
+      yscale: 0.5,
+      zscale: 0.5
     },
     // {
     //   name: "ElevatorDoor",

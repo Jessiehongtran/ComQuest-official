@@ -14,6 +14,8 @@ let bee, squirrel
 const warning = document.getElementById('warning')
 
 const scene = new THREE.Scene()
+var scene2 = new THREE.Scene();
+
 scene.background = new THREE.Color(0xC8F0FA);
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 20000);
 camera.position.set(100,200,300); //important
@@ -54,6 +56,7 @@ const FBXloader = new FBXLoader()
 
 // } );
 
+
 for (let i = 0; i < assets.length; i++){
   FBXloader.load( assets[i].path, function ( obj ) {
     obj.position.set( assets[i].x, assets[i].y, assets[i].z)
@@ -73,7 +76,7 @@ FBXloader.load( '/asset/Squirrel_Fillet_Walk.fbx', function ( obj ) {
   mixer.push(newMixer)
   obj.scale.set(0.6,0.6,0.6)
   obj.position.set(200,-500,-1800)
-  scene.add( obj );    
+  scene2.add( obj );    
 
 }, undefined, function ( e ) {
 
@@ -101,11 +104,13 @@ document.body.appendChild(renderer.domElement);
 // }
 // scene.add(light)
 
-var light = new THREE.HemisphereLight(0xffffbb, 0x0808dd, 1);
+var light = new THREE.HemisphereLight(0xffffbe, 0x0808dd, 1);
 scene.add(light)
+scene2.add(light)
 
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.autoClear = false;
 
 //SHADOW -- but does not work yet
 var light = new THREE.SpotLight(0xFFFFFF, 4.0, 3000);
@@ -131,7 +136,12 @@ function animate(){
     if (squirrel){ 
       camera.lookAt(squirrel.position)
     }
-    renderer.render(scene, camera)
+
+    renderer.clear()
+    renderer.render(scene, camera);
+    renderer.clearDepth()
+    renderer.render(scene2, camera);
+
     const delta = clock.getDelta();
     // if (mixer && mixer.length > 0){
     //   mixer.forEach(each => each.update(delta));
