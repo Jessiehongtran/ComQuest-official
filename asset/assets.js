@@ -8,7 +8,9 @@ export const assets = [
       xscale: 1.5, 
       yscale: 1.5,
       zscale: 1.5,
-      bgColor: "000000"
+      b: 200,
+      g: 100,
+      r: 10
     },
     {
       name: "Dividing Wall",
@@ -19,7 +21,9 @@ export const assets = [
       xscale: 1, 
       yscale: 1,
       zscale: 1,
-      bgColor: "F38902"
+      b: 17 ,
+      g: 55,
+      r: 220
     },
     {
       name: "Floor",
@@ -30,7 +34,9 @@ export const assets = [
       xscale: 1, 
       yscale: 1,
       zscale: 1,
-      bgColor: "503F3A"
+      b: 220 ,
+      g: 203,
+      r: 100
     },
     {
       name: "Inner Wall 1",
@@ -41,7 +47,9 @@ export const assets = [
       xscale: 1, 
       yscale: 1,
       zscale: 1,
-      bgColor: "F38902"
+      b: 50,
+      g: 70,
+      r: 230
     },
     {
       name: "Inner Wall 2",
@@ -52,7 +60,9 @@ export const assets = [
       xscale: 1, 
       yscale: 1,
       zscale: 1,
-      bgColor: "F38902"
+      b: 177 ,
+      g: 26,
+      r: 189
     },
     {
       name: "Outer Wall",
@@ -63,6 +73,8 @@ export const assets = [
       xscale: 1, 
       yscale: 1,
       zscale: 1,
-      bgColor: "1BD9FA"
+      b: 255 ,
+      g: 210,
+      r: 18
     },
   ]

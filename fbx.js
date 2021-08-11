@@ -44,6 +44,18 @@ for (let i = 0; i < assets.length; i++){
   FBXloader.load( assets[i].path, function ( obj ) {
     obj.position.set( assets[i].x, assets[i].y, assets[i].z)
     obj.scale.set( assets[i].xscale, assets[i].yscale, assets[i].zscale)
+    obj.traverse( function (object) {
+      if (object.isMesh){
+        console.log(object.material)
+        if (object.material.length > 0){
+          for (let i in object.material){
+            object.material[i].color.add({b: assets[i].b, g: assets[i].g, r: assets[i].r });
+          }
+        } else {
+          object.material.color.add({ b: assets[i].b, g: assets[i].g, r: assets[i].r });
+        }
+      }
+    } );
     scene.add( obj );
   }, undefined, function ( e ) {
     console.error( e );
