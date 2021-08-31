@@ -9,7 +9,7 @@ import { assets } from './asset/assets.js'
 //Questions/curiosity:
 
 
-let bee, squirrel
+let bee, squirrel, squirrelNPC, cub
 
 const warning = document.getElementById('warning')
 
@@ -63,13 +63,64 @@ for (let i = 0; i < assets.length; i++){
 
 }
 
-FBXloader.load( '/asset/Squirrel_Fillet_Walk.fbx', function ( obj ) {
+FBXloader.load( '/asset/Squirrel_Walk_scaled.fbx', function ( obj ) {
   squirrel = obj
   let newMixer = new THREE.AnimationMixer(obj)
   let action = newMixer.clipAction(obj.animations[0])
   action.play()
   mixer.push(newMixer)
-  obj.scale.set(0.6,0.6,0.6)
+  obj.scale.set(1,1,1)
+  obj.position.set(200,-500,-1800)
+  scene2.add( obj );    
+
+}, undefined, function ( e ) {
+
+console.error( e );
+
+} );
+
+let cubicle
+
+
+FBXloader.load( '/asset/GreySquirrel_NPC.fbx', function ( obj ) {
+  squirrelNPC = obj
+  // let newMixer = new THREE.AnimationMixer(obj)
+  // let action = newMixer.clipAction(obj.animations[0])
+  // action.play()
+  // mixer.push(newMixer)
+  obj.scale.set(1,1,1)
+  obj.position.set(200,-700,-1800)
+  scene2.add( obj );    
+
+}, undefined, function ( e ) {
+
+console.error( e );
+
+} );
+
+FBXloader.load( '/asset/Level_3_Cubicle.fbx', function ( obj ) {
+  cub = obj
+  // let newMixer = new THREE.AnimationMixer(obj)
+  // let action = newMixer.clipAction(obj.animations[0])
+  // action.play()
+  // mixer.push(newMixer)
+  obj.scale.set(1,1,1)
+  obj.position.set(200,-900,-1800)
+  scene2.add( obj );    
+
+}, undefined, function ( e ) {
+
+console.error( e );
+
+} );
+
+FBXloader.load( '/asset/OfficeDeskCubicle.fbx', function ( obj ) {
+  cubicle = obj
+  // let newMixer = new THREE.AnimationMixer(obj)
+  // let action = newMixer.clipAction(obj.animations[0])
+  // action.play()
+  // mixer.push(newMixer)
+  obj.scale.set(1,1,1)
   obj.position.set(200,-500,-1800)
   scene2.add( obj );    
 
@@ -87,11 +138,12 @@ renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
 
 //LIGHTS
-var light = new THREE.AmbientLight(0xF38902, 1.4 );
-scene.add(light);
+// var light = new THREE.AmbientLight(0xF38902, 1.4 );
+// scene.add(light);
 
-// var light = new THREE.PointLight(0xF38902, 1.0, 5000);
-// scene.add(light)
+var light = new THREE.PointLight(0xF38907, 1.0, 2000);
+// light.position.set( 100, -600, -2000 );
+scene.add(light)
 
 // var light = new THREE.DirectionalLight(0xF38902, 2.0, 1000);
 // if (squirrel){
@@ -108,10 +160,10 @@ renderer.shadowMap.type = THREE.PCFShadowMap;
 renderer.autoClear = false;
 
 //SHADOW -- but does not work yet
-var light = new THREE.SpotLight(0xFFFFFF, 4.0, 3000);
+var light = new THREE.SpotLight(0xffffbe, 4.0, 3000);
 light.position.y = 100;
 if (squirrel){
-  light.target = squirrel;
+  light.target = cubicle;
 }
 
 light.cashShadow = true;
