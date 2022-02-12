@@ -141,9 +141,9 @@ document.body.appendChild(renderer.domElement);
 // var light = new THREE.AmbientLight(0xF38902, 1.4 );
 // scene.add(light);
 
-var light = new THREE.PointLight(0xF38907, 1.0, 2000);
+var pointlight = new THREE.PointLight(0xF38907, 2.0, 4000);
 // light.position.set( 100, -600, -2000 );
-scene.add(light)
+scene.add(pointlight)
 
 // var light = new THREE.DirectionalLight(0xF38902, 2.0, 1000);
 // if (squirrel){
@@ -151,27 +151,27 @@ scene.add(light)
 // }
 // scene.add(light)
 
-var light = new THREE.HemisphereLight(0xffffbe, 0x0808dd, 1);
-scene.add(light)
-scene2.add(light)
+var hemilight = new THREE.HemisphereLight(0xffffbe, 0x0808dd, 1);
+// scene.add(hemilight)
+scene2.add(hemilight)
 
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
 renderer.autoClear = false;
 
 //SHADOW -- but does not work yet
-var light = new THREE.SpotLight(0xffffbe, 4.0, 3000);
-light.position.y = 100;
+var spotlight = new THREE.SpotLight(0xffffbe, 4.0, 3000);
+spotlight.position.y = 100;
 if (squirrel){
-  light.target = cubicle;
+  spotlight.target = cubicle;
 }
 
-light.cashShadow = true;
-light.shadow = new THREE.LightShadow(new THREE.PerspectiveCamera(100, 1, 500, 1000));
-light.shadow.bias = 0.0001;
-light.shadow.mapSize.width = 2048*2;
-light.shadow.mapSize.height = 2048*2;
-scene.add(light);
+spotlight.cashShadow = true;
+spotlight.shadow = new THREE.LightShadow(new THREE.PerspectiveCamera(100, 1, 500, 1000));
+spotlight.shadow.bias = 0.0001;
+spotlight.shadow.mapSize.width = 2048*2;
+spotlight.shadow.mapSize.height = 2048*2;
+scene.add(spotlight);
 
 if (squirrel){
   squirrel.castShadow = true;

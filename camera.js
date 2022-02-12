@@ -1,10 +1,10 @@
-import * as Three from 'three'
-import oc from 'three-orbit-controls'
-import { mode } from './webpack.config';
-import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@0.117.1/examples/jsm/loaders/FBXLoader.js'
+// import * as Three from 'three'
+// import oc from 'three-orbit-controls'
+// import { mode } from './webpack.config';
+// import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@0.117.1/examples/jsm/loaders/FBXLoader.js'
 
 
-const OrbitControls = oc(Three)
+// const OrbitControls = oc(Three)
 
 const alert = document.getElementById("alert")
 alert.style.position = 'absolute'
@@ -51,22 +51,22 @@ goal.position.set(10, 10, -10);
 // scene.add(mesh)
 
 
-// const loader = new THREE.GLTFLoader()
-const loader = new FBXLoader()
+const loader = new THREE.GLTFLoader()
+// const loader = new FBXLoader()
 
 var light = new THREE.AmbientLight(0xffffff);
 scene.add(light);
 const clock = new THREE.Clock();
 
-loader.load( '/asset/BirchTree_1.fbx', function ( object ) {
+// loader.load( '/asset/BirchTree_1.fbx', function ( object ) {
 
-    scene.add( object );
+//     scene.add( object );
 
-}, undefined, function ( e ) {
+// }, undefined, function ( e ) {
 
-  console.error( e );
+//   console.error( e );
 
-} );
+// } );
 
 // const fbxLoader = new FBXLoader()
 // loader.load('/asset/BirchTree_1.fbx', (obj) => {
@@ -77,6 +77,12 @@ loader.load( '/asset/BirchTree_1.fbx', function ( object ) {
 //         console.log(error)
 //     }
 // )
+
+loader.load('/asset/NEW_wf_no_ele_OK_Shades3.gltf', (gltf) => {
+    model = gltf.scene
+    scene.add(model)
+    console.log('model', model)
+})
 
 // loader.load('/asset/Squirrel_Fillet.gltf', function (gltf){
 //     model = gltf.scene
@@ -135,16 +141,16 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
 
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enablePan = false;
-controls.enableZoom = false;
-controls.target.set(0, 1, 0);
-controls.keys = {
-    LEFT: 'ArrowLeft',
-    UP: 'ArrowUp',
-    RIGHT: 'ArrowRight',
-    DOWN: 'ArrowDown'
-}
+// const controls = new OrbitControls(camera, renderer.domElement);
+// controls.enablePan = false;
+// controls.enableZoom = false;
+// controls.target.set(0, 1, 0);
+// controls.keys = {
+//     LEFT: 'ArrowLeft',
+//     UP: 'ArrowUp',
+//     RIGHT: 'ArrowRight',
+//     DOWN: 'ArrowDown'
+// }
 
 
 function animate(){

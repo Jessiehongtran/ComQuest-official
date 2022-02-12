@@ -60,17 +60,17 @@ function init(){
     cube = new THREE.Mesh(cubeGeometry, cubeMaterial );
     scene.add(cube);
 
-    const loader = new FBXLoader()
+    // const loader = new FBXLoader()
 
-    loader.load( '/asset/BirchTree_1.fbx', function ( object ) {
+    // loader.load( '/asset/BirchTree_1.fbx', function ( object ) {
 
-        scene.add( object );
+    //     scene.add( object );
 
-    }, undefined, function ( e ) {
+    // }, undefined, function ( e ) {
 
-    console.error( e );
+    // console.error( e );
 
-    } );
+    // } );
 
 }
 
